@@ -1,0 +1,13 @@
+{% extends 'ERP/template.html' %}
+{% block title %}ERP - Login{% endblock %}
+
+{% block main %}
+<h1>Login</h1>
+{% if user.is_authenticated %} Logged as {{ user.name }} {% endif %}
+{{ error }}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+{% endblock %}

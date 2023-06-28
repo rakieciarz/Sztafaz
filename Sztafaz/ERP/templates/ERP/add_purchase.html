@@ -1,0 +1,95 @@
+{% extends 'ERP/home.html' %}
+
+{% block function %}
+<br><br>
+<div class="container-fluid">
+  <h2>Add Purchase order</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="container-xl">
+            <h5 class="border-bottom">Vendor</h5>
+            <div class="container-xl">
+                <div class="row">
+                  <div class="col-sm-2">
+                  <input class="form-control" type="text" list="vendors"/>
+                    <datalist id="vendors">
+                      <option>Vendor 1</option>
+                      <option>Vendor 2</option>
+                    </datalist>
+                  </div>
+                  <div class="col-sm-2">
+                    <button>Add new vendor</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p>No.: </p>
+                  </div>
+                  <div class="col-sm-6">
+                    <p>Name: </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p>Address </p>
+                  </div>
+                  <div class="col-sm-6">
+                    <p>Date </p>
+                  </div>
+                </div>
+              </div>
+            <h5 class="border-bottom">Header</h5>
+            <div class="container-xl">
+              <div class="row">
+                  <div class="col-sm-4">
+                    <p>No.: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-4">
+                    <p>No.: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-4">
+                    <p>No.: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-4">
+                    <p>No.: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p>Name: </p>
+                  </div>
+              </div>
+            </div>
+            <h5 class="border-bottom">Details</h5>
+            <div class="container-xl">
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
