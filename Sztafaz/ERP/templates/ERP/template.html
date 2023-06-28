@@ -9,8 +9,24 @@
   <body>
     <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
       <div class="bg-dark p-4">
-        <h5 class="text-body-emphasis h4">Collapsed content</h5>
-        <span class="text-body-secondary">Toggleable via the navbar brand.</span>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-4">
+              <h5 class="text-body-emphasis h4">Collapsed content</h5>
+              {% if user.is_authenticated %}
+              <span class="text-body-secondary">User: {{ user.username }} </span>
+              {% endif %}
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-2 float-right">
+              <form action="{% url 'logoutuser' %}">
+                <button type="submit">Logout</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <nav class="navbar navbar-dark bg-dark">

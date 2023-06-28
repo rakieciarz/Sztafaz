@@ -5,4 +5,22 @@
 {% block main %}
     <h1> This is the ERP</h1>
     <h3> Here have to authorizate if user has access to ERP system.</h3>
+<div class="container-fluid">
+    <div class="container-xl">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" placeholder="Search control" name="q">
+                </div>
+                <div class="col-sm-1">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container-xl">
+        {% block function %} {% endblock %}
+    </div>
+</div>
 {% endblock %}

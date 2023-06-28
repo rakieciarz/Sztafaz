@@ -112,7 +112,7 @@ class OrderHeader(models.Model):
 class OrderDetails(models.Model):
     order_number = models.ForeignKey(OrderHeader, on_delete=models.CASCADE)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)  # It will be ForeignKey
-    quantity = models.IntegerField(max_length=16)
+    quantity = models.IntegerField()
     cost = models.IntegerField(default=0)
     other_expenses = models.IntegerField(default=0)
     tax = models.IntegerField(default=0)
@@ -121,3 +121,28 @@ class OrderDetails(models.Model):
     def __str__(self):
         return self.order_number.name
 
+
+# Models for accounting
+
+class Accounts(models.Model):
+    class AccountType(models.TextChoices):
+        ASSETS = 'Assets'
+        LIABILITIES = 'Liabilities'
+
+    account_name = models.CharField(max_length=64)
+    account_type = models.CharField(max_length=32, choices=AccountType.choices)
+    basic_code = models.CharField(max_length=8)
+    extended_code = models.CharField(max_length=8)
+
+
+class AccountingTransactions(models.Model):
+    document_id = models.ForeignKey(OrderHeader, on_delete=models.CASCADE)
+    transaction_day = models.DateField(auto_now_add=True)
+    descriptions = models.TextField()
+
+
+class LedgerEntries(models.Model):
+    transaction_id = models.ForeignKey(AccountingTransactions, on_delete=models.CASCADE)
+    account_id = models.ForeignKey(Accounts, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
