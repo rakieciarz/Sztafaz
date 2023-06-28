@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from .models import Vendors
 
 
 # Create your views here.
@@ -20,7 +21,7 @@ def home(request):
             query = search(request.POST['q'])
             # If so, return the given function
             if query is not None:
-                return render(request, query)
+                return render(request, query[0], query[1])
             else:
                 return render(request, 'ERP/home.html', {'error': 'No function you called'})
     else:
@@ -33,7 +34,10 @@ def search(query):
                }
     # Check if function exists
     try:
-        return mapping[query]
+        # Vendor data
+        vendors = Vendors.objects.all()
+        results = [mapping[query], {'vendors': vendors}]
+        return results
     except KeyError:
         return None
 

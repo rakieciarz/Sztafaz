@@ -13,8 +13,9 @@
                   <div class="col-sm-2">
                   <input class="form-control" type="text" list="vendors"/>
                     <datalist id="vendors">
-                      <option>Vendor 1</option>
-                      <option>Vendor 2</option>
+                        {% for vendor in vendors %}
+                        <option>{{ vendor.name }}</option>
+                        {% endfor %}
                     </datalist>
                   </div>
                   <div class="col-sm-2">
