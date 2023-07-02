@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Vendors
+from .models import Vendors, OrderHeader, OrderDetails
 
 
 # Create your views here.
@@ -61,3 +61,11 @@ def loginuser(request):
 def logoutuser(request):
     logout(request)
     return redirect('home')
+
+
+# My functions
+def purchasing_order(request):
+    if request.method == "POST":
+        pass
+    else:
+        return redirect('home')

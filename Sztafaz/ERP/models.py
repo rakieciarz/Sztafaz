@@ -65,6 +65,10 @@ class Product(models.Model):
 
 # Model that collect images
 class ProductPhoto(models.Model):
+    def pdf_upload_path(instance, filename):
+        # Function return path to directiony collecting documentation for order
+        return "ERP/media/photos/{0}_{1}".format(instance.product.name, filename)
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     is_first = models.BooleanField(default=False)
     images = models.ImageField(upload_to='ERP/media/')
@@ -122,7 +126,26 @@ class OrderDetails(models.Model):
         return self.order_number.name
 
 
+# Models collects all documents related to Order ex. Invoices
+class Documents(models.Model):
+    def pdf_upload_path(instance, filename):
+        # Function return path to directiony collecting documentation for order
+        return "ERP/media/documents/{0}/{1}_{2}_{3}".format(instance.order.name, filename, instance.document_type, instance.document_no)
+
+    order = models.ForeignKey(OrderHeader, on_delete=models.CASCADE)
+    document_type = models.CharField(max_length=32)
+    document_no = models.CharField(max_length=32)
+    created_date = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True,
+        null=True,
+        blank=True,
+    )
+    # Adding document to the correct path
+    pdf = models.FileField(upload_to=pdf_upload_path, blank=True)
+
 # Models for accounting
+
 
 class Accounts(models.Model):
     class AccountType(models.TextChoices):
@@ -136,7 +159,7 @@ class Accounts(models.Model):
 
 
 class AccountingTransactions(models.Model):
-    document_id = models.ForeignKey(OrderHeader, on_delete=models.CASCADE)
+    order_id = models.ForeignKey(OrderHeader, on_delete=models.CASCADE)
     transaction_day = models.DateField(auto_now_add=True)
     descriptions = models.TextField()
 
