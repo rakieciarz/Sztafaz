@@ -1,6 +1,6 @@
 FROM python:3
-RUN mkdir -r /Project/
-WORKDIR /Project
-COPY requirements.txt /Project/
+RUN mkdir -p /project/
+WORKDIR /project
+COPY requirements.txt /project/
 RUN pip install -r requirements.txt
-COPY . /Project/
+COPY . /project/
