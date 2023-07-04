@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  Sztafaz:
+    build: .
+    volumes:
+      - .:/Project/
+    ports:
+      - "8000:8000"
